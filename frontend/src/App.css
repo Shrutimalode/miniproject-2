@@ -1,0 +1,225 @@
+html, body, #root {
+  height: 100%;
+}
+
+.app-container {
+  background-color: #f8f9fa;
+  padding-top: 56px; /* Adjust based on your navbar height */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content-wrapper {
+  flex-grow: 1;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #4a154b !important;
+}
+
+.btn-primary {
+  background-color: #4a154b;
+  border-color: #4a154b;
+}
+
+.btn-primary:hover {
+  background-color: #3b1139;
+  border-color: #3b1139;
+}
+
+.btn-outline-primary {
+  color: #4a154b;
+  border-color: #4a154b;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4a154b;
+  color: #fff;
+}
+
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.community-card {
+  height: 100%;
+}
+
+.form-control:focus {
+  border-color: #4a154b;
+  box-shadow: 0 0 0 0.25rem rgba(74, 21, 75, 0.25);
+}
+
+.material-list-item {
+  transition: background-color 0.2s ease;
+}
+
+.material-list-item:hover {
+  background-color: #f3f3f3;
+}
+
+.search-input {
+  border-radius: 20px;
+  padding-left: 15px;
+}
+
+.search-button {
+  border-radius: 20px;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container, .main-content-wrapper {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .dashboard-header-row {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .card {
+    margin-bottom: 20px;
+  }
+  .main-full-width, .hero-full-width {
+    width: 100vw;
+    left: 0;
+    transform: none;
+  }
+  .footer {
+    font-size: 0.95rem;
+    padding: 10px 0;
+  }
+  .row {
+    flex-direction: column !important;
+  }
+  .col, [class^="col-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .side-panel, .dashboard-side-panel, .community-side-panel {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  .dashboard-search-input {
+    width: 100% !important;
+    margin-top: 8px !important;
+  }
+}
+
+
+
+
+.main-full-width {
+  width: 100vw; /* Force full viewport width */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0; /* Remove any padding */
+  margin: 0; /* Remove any margin */
+  overflow: hidden; /* Hide any overflow caused by width:100vw */
+}
+
+/* Full-width hero section */
+.hero-full-width {
+  position: relative; /* Keep this for z-index and relative positioning of children */
+  width: 100%; /* Take full width of its parent (which is now main-full-width) */
+  margin: 0;
+  padding: 0;
+}
+
+/* Loading spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+/* Custom file upload button */
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.custom-file-upload:hover {
+  background-color: #e9ecef;
+}
+
+/* Join code display */
+.join-code {
+  font-family: monospace;
+  letter-spacing: 2px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px dashed #ccc;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Role badges */
+.role-badge {
+  font-size: 0.8rem;
+  padding: 3px 8px;
+}
+
+.role-admin {
+  background-color: #4a154b;
+}
+
+.role-teacher {
+  background-color: #1e88e5;
+}
+
+.role-student {
+  background-color: #43a047;
+}
+
+.material-action-btn:hover {
+  background: #ececec;
+  box-shadow: 0 2px 6px rgba(74,21,75,0.07);
+}
+.material-action-btn.view:hover {
+  background: #3b1139;
+}
+.material-action-btn.download:hover {
+  background: #1565c0;
+}
+
+.material-action-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blog-action-mobile-right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+@media (min-width: 768px) {
+  .blog-action-mobile-right {
+    max-width: 120px;
+    padding-right: 0;
+  }
+} 
