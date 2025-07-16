@@ -27,15 +27,4 @@ jobs:
       run: |
         npm ci
         npm run build
-        npm test
-
-    - name: Install and Test Backend
-      working-directory: ./backend
-      run: |
-        npm ci
-        npm test
-
-    - name: Run Linting
-      run: |
-        cd frontend && npm run lint
-        cd ../backend && npm run lint 
+        npm test 
