@@ -1,24 +1,13 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 
-// Create uploads directory if it doesn't exist
-const uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Configure storage
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function(req, file, cb) {
-    // Create unique filename
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
-  }
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // File filter
@@ -34,9 +23,7 @@ const fileFilter = (req, file, cb) => {
     // Archives
     '.zip', '.rar'
   ];
-  
-  const ext = path.extname(file.originalname).toLowerCase();
-  
+  const ext = require('path').extname(file.originalname).toLowerCase();
   if (allowedFileTypes.includes(ext)) {
     cb(null, true);
   } else {
@@ -44,7 +31,20 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Configure multer
+// Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'shikshahub_uploads',
+    resource_type: 'auto', // auto-detect file type
+    format: async (req, file) => undefined, // keep original format
+    public_id: (req, file) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      return file.fieldname + '-' + uniqueSuffix;
+    },
+  },
+});
+
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
