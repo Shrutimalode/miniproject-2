@@ -245,17 +245,25 @@ const CommunityDetails = () => {
   };
 
 // Handle material view
-  const handleViewMaterial = async (materialId) => {
-    try {
-      // Open in new tab with view parameter, directly targeting the backend
-      // Include the token as a query parameter for authentication
-      window.open(`http://localhost:5000/materials/download/${materialId}?view=true&token=${token}`, '_blank');
+const handleViewMaterial = async (materialId) => {
+  try {
+    const res = await api.get(`/materials/download/${materialId}?view=true`, {
+      responseType: 'blob',
+      headers: { 'x-auth-token': token }
+    });
 
-    } catch (error) {
-      alert('Failed to view material. Please try again.');
-      console.error('Error viewing material:', error);
-    }
-  };
+    // If you want to open the file in a new tab:
+    const blob = new Blob([res.data], { type: res.headers['content-type'] });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    // Optionally, revoke the object URL after some time
+    setTimeout(() => window.URL.revokeObjectURL(url), 1000 * 60);
+  } catch (error) {
+    alert('Failed to view material. Please try again.');
+    console.error('Error viewing material:', error);
+  }
+};
+
   
   // Handle join request
   const handleRequestToJoin = async () => {
