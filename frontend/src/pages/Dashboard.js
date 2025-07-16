@@ -165,18 +165,18 @@ const Dashboard = () => {
   }, [searchTerm, joinedCommunities, allCommunities, activeTab]);
 
   // Get role badge variant
-  const getRoleBadgeVariant = (role) => {
-    switch (role) {
-      case 'admin':
-        return 'danger';
-      case 'teacher':
-        return 'primary';
-      case 'student':
-        return 'success';
-      default:
-        return 'secondary';
-    }
-  };
+  // const getRoleBadgeVariant = (role) => {
+  //   switch (role) {
+  //     case 'admin':
+  //       return 'danger';
+  //     case 'teacher':
+  //       return 'primary';
+  //     case 'student':
+  //       return 'success';
+  //     default:
+  //       return 'secondary';
+  //   }
+  // };
 
   // Render loading spinner
   if (loading) {

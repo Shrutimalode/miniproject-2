@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Form, InputGroup, Spinner, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
 
 const DashboardSidePanel = ({ joinCode, setJoinCode, joinLoading, joinError, joinSuccess, handleJoinCommunity }) => {
   return (
