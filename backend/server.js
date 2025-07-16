@@ -19,8 +19,10 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: [
-    'https://shikshahub.onrender.com',
-    'http://localhost:3000'
+  
+    'http://localhost:3000',
+    'https://shikshahub.vercel.app',
+    'https://heartfelt-torte-86a213.netlify.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
