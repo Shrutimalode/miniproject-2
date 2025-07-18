@@ -92,7 +92,7 @@ const CommunityDetails = () => {
   // Fetch events with useCallback
   const fetchEvents = useCallback(async () => {
     try {
-      const res = await api.get(`/communities/${id}/events`);
+      const res = await api.get(`/api/communities/${id}/events`);
       setEvents(res.data);
     } catch (err) {
       console.error('Error fetching events:', err);
