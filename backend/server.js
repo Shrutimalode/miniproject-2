@@ -32,10 +32,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/communities', communityRoutes);
-app.use('/materials', materialRoutes);
-app.use('/blogs', blogRoutes);
-app.use('/chats', chatRoutes);
+app.use('/api/communities', communityRoutes);
+app.use('/api/materials', materialRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/chats', chatRoutes);
 
 // Uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
