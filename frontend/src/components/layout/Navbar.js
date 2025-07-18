@@ -54,7 +54,7 @@ const AppNavbar = () => {
   );
 
   const guestLinks = (
-    <Nav className="ms-auto" style={{ marginRight: '-8rem' }}>
+    <Nav className="ms-auto" style={{ marginRight: '0.5rem' }}>
       <Button as={Link} to="/login" variant="outline-primary" className="me-4" size="sm">Login</Button>
       <Button as={Link} to="/register" variant="primary" size="sm">Register</Button>
     </Nav>

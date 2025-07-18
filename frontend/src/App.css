@@ -222,4 +222,8 @@ html, body, #root {
     max-width: 120px;
     padding-right: 0;
   }
+}
+
+.guest-auth-buttons {
+  margin-left: 1rem;
 } 
