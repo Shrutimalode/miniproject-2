@@ -6,6 +6,7 @@ const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
+  const [isThinking, setIsThinking] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -23,6 +24,7 @@ const ChatBot = () => {
     const userMessage = inputMessage;
     setMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
     setInputMessage('');
+    setIsThinking(true);
 
     try {
       console.log('Sending message to backend:', userMessage);
@@ -39,6 +41,8 @@ const ChatBot = () => {
         status: error.response?.status
       });
       setMessages(prev => [...prev, { text: 'Sorry, I encountered an error. Please try again.', sender: 'bot' }]);
+    } finally {
+      setIsThinking(false);
     }
   };
 
@@ -56,6 +60,15 @@ const ChatBot = () => {
                 {message.text}
               </div>
             ))}
+            {isThinking && (
+              <div className="message bot thinking">
+                <span className="loader-dots">
+                  <span>.</span>
+                  <span>.</span>
+                  <span>.</span>
+                </span>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
           <form onSubmit={handleSendMessage} className="input-container">
