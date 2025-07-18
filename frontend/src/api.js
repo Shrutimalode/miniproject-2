@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://shikshahub.vercel.app/',
+  baseURL: process.env.REACT_APP_API_URL || 'https://shikshahub.onrender.com',
   withCredentials: true, // optional if you use cookies
 });
 
