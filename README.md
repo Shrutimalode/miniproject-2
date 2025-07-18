@@ -1,4 +1,4 @@
-<h1 align="center">🎓 ShikshaHub - Educational Platform</h1>
+<h1 align="center">🎓 ShikshaHub - Centralized Platform</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/MERN-Stack-green" />
@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
 </p>
 
-> A **comprehensive learning platform** that connects **students, teachers**, and **educational content creators**.  
+> A **comprehensive platform** that connects **students, teachers**, and **educational content creators**.  
 > Enables learning through communities, study materials, blogs, events, AI chatbot, and more.
 
 ---
