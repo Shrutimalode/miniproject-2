@@ -21,8 +21,8 @@ app.use(cors({
   origin: [
   
     'http://localhost:3000',
-    'https://shikshahub.vercel.app',
-    'https://heartfelt-torte-86a213.netlify.app'
+    'https://shikshahub.onrender.com',
+    'https://shikshahub-yysx.onrender.com'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
