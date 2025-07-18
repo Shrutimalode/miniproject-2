@@ -26,7 +26,7 @@ const ChatBot = () => {
 
     try {
       console.log('Sending message to backend:', userMessage);
-      const response = await api.post('/chat', {
+      const response = await api.post('api/chat', {
         message: userMessage
       });
       console.log('Received response from backend:', response.data);
