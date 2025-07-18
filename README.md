@@ -16,7 +16,17 @@
 
 🔗 **Live Demo**: [Click here to visit ShikshaHub](https://heartfelt-torte-86a213.netlify.app)
 
+## 🖼️ Screenshots
 
+Below are some screenshots of the platform:
+
+<p align="center">
+  <img src="assets/1.png" alt="Screenshot 1" width="400"/>
+  <img src="assets/2.png" alt="Screenshot 2" width="400"/>
+  <img src="assets/3.png" alt="Screenshot 3" width="400"/>
+  <img src="assets/4.png" alt="Screenshot 4" width="400"/>
+  <img src="assets/5.png" alt="Screenshot 5" width="400"/>
+</p>
 
 ---
 
