@@ -13,9 +13,8 @@ const chat = async (req, res) => {
 
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-    // 🔁 Use chat session for text-only models
-    const chatSession = await model.startChat();
-    const result = await chatSession.sendMessage(message);
+    // Use faster generateContent method
+    const result = await model.generateContent(message);
     const response = result.response.text();
 
     console.log('Response:', response);

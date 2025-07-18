@@ -497,7 +497,7 @@ exports.summarizeBlog = async (req, res) => {
     }
 
     // Get the generative model
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-04-17" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Create prompt for summarization
     const prompt = `Please provide a concise summary of the following blog post in 2-3 sentences:\n\n${content}`;

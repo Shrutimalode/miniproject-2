@@ -16,8 +16,7 @@
 
 > _Add screenshots or a hosted demo link here_
 
-![Home Page](https://your-image-link)
-![Chat System](https://your-image-link)
+
 
 ---
 
