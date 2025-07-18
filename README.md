@@ -1,72 +1,122 @@
-# ShikshaHub - Educational Platform
+<h1 align="center">🎓 ShikshaHub - Educational Platform</h1>
 
-ShikshaHub is a comprehensive educational platform that connects students, teachers, and educational content creators. The platform facilitates learning through communities, study materials, blogs, events, and interactive features.
+<p align="center">
+  <img src="https://img.shields.io/badge/MERN-Stack-green" />
+  <img src="https://img.shields.io/badge/React-v17.0.2-blue" />
+  <img src="https://img.shields.io/badge/Node.js-v14+-green" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+</p>
 
-## Tech Stack
+> A **comprehensive learning platform** that connects **students, teachers**, and **educational content creators**.  
+> Enables learning through communities, study materials, blogs, events, AI chatbot, and more.
 
-### Frontend
-- **React.js** (v17.0.2) - Frontend framework
-- **React Router DOM** (v6.0.2) - Client-side routing
-- **React Bootstrap** (v2.0.3) - UI components and styling
-- **Axios** (v0.24.0) - HTTP client for API requests
-- **Bootstrap** (v5.1.3) - CSS framework
+---
 
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** (v4.17.1) - Web framework
-- **MongoDB** - Database
-- **Mongoose** (v6.0.12) - MongoDB object modeling
-- **JWT** (v8.5.1) - Authentication
-- **Bcryptjs** (v2.4.3) - Password hashing
-- **Multer** (v1.4.3) - File upload handling
-- **Google Generative AI** (v0.24.1) - AI integration
-- **Nodemailer** - Email functionality
-- **CORS** (v2.8.5) - Cross-origin resource sharing
-- **Dotenv** (v10.0.0) - Environment variable management
+## 📸 Demo
 
-### Development Tools
-- **Nodemon** - Development server with auto-reload
-- **Git** - Version control
+> _Add screenshots or a hosted demo link here_
 
-## API Endpoints
+![Home Page](https://your-image-link)
+![Chat System](https://your-image-link)
 
-### Authentication (`/api/auth`)
-- User registration and login
-- JWT-based authentication
-- Password hashing and security
-- **Welcome email notifications** for new registrations
+---
 
-### Communities (`/api/communities`)
-- Create and manage learning communities (admin only)
-- Join/leave communities
-- Community discussions and interactions
+## 🚀 Features
 
-### Study Materials (`/api/materials`)
-- Upload and manage educational content
-- File handling with Multer
-- Material categorization and search
+- 🔐 Role-based Authentication (JWT)
+- 👨‍🏫 Community-based Learning
+- 📚 Study Material Upload with Cloudinary
+- ✍️ Blog Management with AI Summarization
+- 📅 Event Creation within Communities
+- 💬 Real-time Chat + AI Chatbot (Gemini)
+- 📧 Automated Welcome Emails
+- 📱 Responsive UI with React-Bootstrap
 
-### Blogs (`/api/blogs`)
-- Create and manage educational blog posts
-- Content management
-- Blog interactions and comments
-- AI-powered blog summarization
+---
 
-### Events (`/api/communities/:communityId/events`)
-- Create and manage events within communities (members only)
-- Event details: title, description, links, location, date, time
+## 🧰 Tech Stack
 
-### Chat System (`/api/chat`)
-- Real-time communication
-- User-to-user messaging
-- Community chat features
-- AI-powered chatbot (Gemini)
+### 🔹 Frontend
+
+| Tool              | Purpose                          |
+|-------------------|----------------------------------|
+| React.js          | Frontend library                 |
+| React Router DOM  | Routing                          |
+| Bootstrap & React-Bootstrap | UI components         |
+| Axios             | HTTP client                      |
+
+### 🔸 Backend
+
+| Tool              | Purpose                          |
+|-------------------|----------------------------------|
+| Node.js + Express | Server & routing                 |
+| MongoDB + Mongoose| Database & modeling              |
+| JWT + Bcryptjs    | Authentication & security        |
+| Nodemailer        | Email handling                   |
+| Multer            | File uploads                     |
+| Google Gemini AI  | AI Chatbot & Blog Summary        |
+| Cloudinary        | File hosting                     |
+
+---
+
+## 📁 Folder Structure
+
+```bash
+shikshahub/
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   └── utils/
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── assets/
+│   └── utils/
+├── .env
+├── README.md
+
+
+📖 API Overview
+🔐 Authentication - /api/auth
+Register/Login with JWT tokens
+
+Password encryption with Bcrypt
+
+Sends Welcome Email on registration
+
+🏫 Communities - /api/communities
+Admins can create/manage communities
+
+Users can join/leave and participate
+
+📚 Study Materials - /api/materials
+Upload via Multer to Cloudinary
+
+Categorization & file search
+
+✍️ Blogs - /api/blogs
+Role-based blog approval
+
+AI-powered Summarization (Gemini)
+
+Blog interactions and comments
+
+📅 Events - /api/communities/:id/events
+Create/view events inside communities
+
+Date, time, location, links supported
+
+💬 Chat - /api/chat
+Real-time messaging using Socket.io
+
+AI Chatbot integration (Gemini)
 
 ### File Storage
-- Static file serving for uploads via `/uploads`
+- **Cloudinary storage for study materials**
 - Secure file access (only authenticated users can upload)
-- Organized storage structure
-- **Note:** Uploaded files are stored in the `backend/uploads/` directory and served statically. Files are not referenced by name in code, but are linked to materials in the database.
+- Organized storage structure in Cloudinary
+- **Note:** Uploaded study materials are stored in Cloudinary and linked to materials in the database via their Cloudinary URLs.
 
 ## Features
 1. User Authentication and Authorization
@@ -132,17 +182,13 @@ EMAIL_DEBUG=true               # Optional: set to true for verbose email logs
    - Optional comments for approvals
 
 ### Blog Summarization
-1. **AI-Powered Summaries:**
+ **AI-Powered Summaries:**
    - Uses Google's Gemini AI model
-   - Generates concise 2-3 sentence summaries
+   - Generates concise summaries
    - Available for all blog posts
    - Helps with quick content understanding
 
-2. **Summarization Features:**
-   - One-click summary generation
-   - Modal display of summaries
-   - Error handling for failed generations
-   - Loading states during generation
+
 
 ### Blog Management
 1. **Content Types:**
@@ -219,11 +265,17 @@ FRONTEND_URL=http://localhost:3000
 # AI Integration (Gemini API)
 GEMINI_API_KEY=your_gemini_api_key
 
+# Cloudinary Configuration (for file uploads)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
 # Server Configuration
 PORT=5000
 NODE_ENV=development
 ```
 - `GEMINI_API_KEY` is required for AI-powered blog summarization and chat features.
+- `CLOUDINARY_*` variables are required for uploading and storing study materials in Cloudinary.
 
 ### Frontend (.env in frontend directory)
 Create a `.env` file in the `frontend` directory if you want to override the default API URL:
@@ -232,7 +284,12 @@ REACT_APP_API_URL=http://localhost:5000/api
 ```
 - By default, the frontend uses the deployed backend URL. Set this variable to use a local or custom backend during development.
 
-## Development & Testing Endpoints
-- Some endpoints (such as `/api/auth/test-email`) may exist for development or testing purposes. These are not intended for production use.
+
+## File Uploads with Cloudinary
+
+Study materials uploaded through the platform are now stored securely in Cloudinary. The backend is configured to use Cloudinary for all material uploads, and the URLs to these files are saved in the database. This ensures reliable, scalable, and fast access to uploaded content.
+
+- **Cloudinary Setup:** Ensure you have a Cloudinary account and set the required environment variables in your backend `.env` file.
+- **Access:** Uploaded files are accessible via their Cloudinary URLs, which are returned in API responses and used throughout the platform.
 
 --- 
