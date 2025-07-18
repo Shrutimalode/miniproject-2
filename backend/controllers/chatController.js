@@ -1,10 +1,7 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
-// Initialize the Gemini API with API version
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, {
-  apiVersion: 'v1'
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const chat = async (req, res) => {
   try {
@@ -14,22 +11,15 @@ const chat = async (req, res) => {
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    // Log API key status (without exposing the actual key)
-    console.log('GEMINI_API_KEY status:', process.env.GEMINI_API_KEY ? 'Present' : 'Missing');
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-    // Get the generative model - using the latest model name
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-04-17" });
+    // 🔁 Use chat session for text-only models
+    const chatSession = await model.startChat();
+    const result = await chatSession.sendMessage(message);
+    const response = result.response.text();
 
-    console.log('Sending message to Gemini:', message);
-    
-    // Generate content
-    const result = await model.generateContent(message);
-    const response = await result.response;
-    const text = response.text();
-
-    console.log('Received response from Gemini:', text);
-
-    res.json({ response: text });
+    console.log('Response:', response);
+    res.json({ response });
   } catch (error) {
     console.error('Detailed error in chat controller:', {
       name: error.name,
@@ -42,4 +32,4 @@ const chat = async (req, res) => {
 
 module.exports = {
   chat
-}; 
+};
