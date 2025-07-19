@@ -393,8 +393,11 @@ const sendMaterialUploadEmail = async (userEmail, communityName, materialTitle) 
     const mailOptions = {
       from: process.env.EMAIL_USER || 'noreply@shikshahub.com',
       to: userEmail,
-      subject: `A new material titled <strong>${materialTitle}</strong> has just been uploaded in the <strong>${communityName}</strong> community on ShikshaHub.</p>
-<p>Don't miss out on the latest content. Dive in and explore the material now!</p>`
+      subject: `New Material Uploaded in ${communityName} on ShikshaHub`,
+      html: `<p>Hello,</p>
+        <p>a new material titled <strong>${materialTitle}</strong> has been uploaded to the <strong>${communityName}</strong> community on ShikshaHub.</p>
+        <p>Log in to your community to check it out and keep up with the latest resources!</p>
+        <p>Happy learning,<br>Team ShikshaHub</p>`
     };
     await transporter.sendMail(mailOptions);
   } catch (error) {
@@ -426,7 +429,9 @@ const sendBlogReviewEmail = async (userEmail, blogTitle, status) => {
       html = `🎉 Great job! Your blog titled <strong>${blogTitle}</strong> has been <strong>approved</strong> and is now live on ShikshaHub.</p><p>Keep sharing your thoughts and inspiring others with your writing.`;
     } else {
       subject = `Your Blog Was Rejected`;
-      html = `<p>We appreciate your effort in submitting a blog titled <strong>${blogTitle}</strong>.</p><p>Unfortunately, it has been <strong>rejected</strong> during the review process. Please visit <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/myblogs" style="color: #764ba2; font-weight: bold;">ShikshaHub</a> for detailed feedback.</p><p>Feel free to revise and submit again — we’d love to see it!</p>`;
+      html = `<p>We appreciate your effort in submitting a blog titled <strong>${blogTitle}</strong>.</p>
+<p>Unfortunately, it has been <strong>rejected</strong> during the review process. <span style="font-size:1.2em;">😔</span> Please visit ShikshaHub for detailed feedback.</p>
+<p>Feel free to revise and submit again — we’d love to see it!</p>`;
     }
     const mailOptions = {
       from: process.env.EMAIL_USER || 'noreply@shikshahub.com',

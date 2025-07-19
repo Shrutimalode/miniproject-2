@@ -97,7 +97,7 @@ exports.getCommunityById = async (req, res) => {
       
       // Return limited info - just populate joinRequests for the current user
       const userJoinRequests = community.joinRequests.filter(
-        request => request.user._id.toString() === userId
+        request => request.user && request.user._id && request.user._id.toString() === userId
       );
       
       // Return 403 but include basic community info and user's join request if exists
