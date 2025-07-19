@@ -193,23 +193,21 @@ const Dashboard = () => {
     <Container>
       {/* Header Row - full width, no padding on mobile */}
       <div className="dashboard-header-row position-relative" style={{ width: '100vw', marginLeft: 'calc(-50vw + 50%)' }}>
-        <div className="d-flex align-items-center justify-content-between mb-4 position-relative" style={{ minHeight: '48px' }}>
+        <div className="d-flex align-items-center mb-4 position-relative" style={{ minHeight: '48px' }}>
           {/* Left: Sidebar open button for mobile */}
-          
+          <Button
+            variant="link"
+            className="d-lg-none p-0 m-0 border-0 position-absolute"
+            style={{ left: '24px', boxShadow: 'none', zIndex: 2, top: '50%', transform: 'translateY(-50%)' }}
+            onClick={() => setShowSidebar(true)}
+            aria-label="Open sidebar menu"
+            title="Open side panel for more menus"
+          >
+            <i className="fas fa-bars fa-lg"></i>
+          </Button>
           {/* Center: Dashboard title */}
-          <div className="flex-grow-1 d-flex justify-content-center">
-            <h2 className="mb-0">Dashboard</h2>
-          </div>
-          <div style={{ width: '40px' }}>
-            <Button
-              variant="link"
-              className="d-lg-none p-0 m-0 border-0"
-              style={{ boxShadow: 'none', zIndex: 2 }}
-              onClick={() => setShowSidebar(true)}
-              aria-label="Open sidebar menu"
-            >
-              <i className="fas fa-chevron-right fa-lg"></i>
-            </Button>
+          <div className="position-absolute w-100 d-flex justify-content-center" style={{ left: 0, top: 0, height: '100%' }}>
+            <h2 className="mb-0" style={{ lineHeight: '48px' }}>Dashboard</h2>
           </div>
           {/* Right: Invisible placeholder for balance */}
           <div style={{ width: '40px' }} className="d-none d-lg-block"></div>

@@ -106,10 +106,12 @@ const AppNavbar = () => {
     <Navbar bg="white" expand="lg" className="shadow-sm fixed-top" expanded={expanded} onToggle={setExpanded}>
       <Container>
         <Navbar.Brand as={Link} to="/" className="text-primary" style={{ fontSize: '1.2rem' }}>
-          <i className="fas fa-book-reader me-2"></i>
+          <i className="fas fa-graduation-cap me-2"></i>
           ShikshaHub
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav">
+          <i className="fas fa-ellipsis-v"></i>
+        </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           {isAuthenticated ? (
             <>
