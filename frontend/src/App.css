@@ -118,6 +118,25 @@ html, body, #root {
     width: 100% !important;
     margin-top: 8px !important;
   }
+  .guest-auth-buttons {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem;
+    margin-right: 0 !important;
+  }
+  .guest-auth-buttons .btn {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+@media (max-width: 576px) {
+  .guest-auth-buttons .btn {
+    font-size: 0.95rem;
+    padding: 0.45rem 0.6rem;
+  }
 }
 
 
