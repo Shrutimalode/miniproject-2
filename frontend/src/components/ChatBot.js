@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import api from '../api';
 import './ChatBot.css';
+import ReactMarkdown from 'react-markdown';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,11 @@ const ChatBot = () => {
           <div className="messages-container">
             {messages.map((message, index) => (
               <div key={index} className={`message ${message.sender}`}>
-                {message.text}
+                {message.sender === 'bot' ? (
+                  <ReactMarkdown>{message.text}</ReactMarkdown>
+                ) : (
+                  message.text
+                )}
               </div>
             ))}
             {isThinking && (
