@@ -14,7 +14,7 @@
 
 ## 📸 Demo
 
-🔗 **Live Demo**: [Click here to visit ShikshaHub](https://heartfelt-torte-86a213.netlify.app)
+🔗 **Live Demo**: [Click here to visit ShikshaHub](myshikshahub.netlify.app)
 
 ## 🖼️ Screenshots
 
