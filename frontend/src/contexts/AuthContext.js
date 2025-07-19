@@ -75,8 +75,9 @@ export const AuthProvider = ({ children }) => {
   // Login user
   const login = async (formData) => {
     try {
-      console.log('Login attempt:', { email: formData.email, role: formData.role });
-      const res = await api.post('/auth/login', formData);
+      const payload = { email: formData.email, password: formData.password };
+      console.log('Login attempt:', payload);
+      const res = await api.post('/auth/login', payload);
       console.log('Login successful:', res.data);
 
       // ✅ Save token and user info together
