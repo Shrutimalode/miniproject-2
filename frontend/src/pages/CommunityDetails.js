@@ -589,7 +589,7 @@ const handleViewMaterial = async (materialId) => {
               </Card>
 
               <Tab.Container id="community-tabs" activeKey={activeTab} onSelect={k => setActiveTab(k)}>
-                <Nav variant="tabs" className="mb-3">
+                <Nav variant="tabs" className="mb-3 flex-row" style={{ flexWrap: 'nowrap' }}>
                   <Nav.Item>
                     <Nav.Link eventKey="members">Members</Nav.Link>
                   </Nav.Item>
