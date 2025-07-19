@@ -54,9 +54,45 @@ const AppNavbar = () => {
   );
 
   const guestLinks = (
-    <Nav className="ms-auto" style={{ marginRight: '0.5rem' }}>
-      <Button as={Link} to="/login" variant="outline-primary" className="me-4" size="sm">Login</Button>
-      <Button as={Link} to="/register" variant="primary" size="sm">Register</Button>
+      <Nav className="ms-auto guest-auth-buttons" style={{ marginRight: '0.5rem' }}>
+      <Button
+        as={Link}
+        to="/login"
+        variant="outline-primary"
+        className="me-4"
+        size="sm"
+        onClick={handleNavClick}
+        style={{
+          fontSize: '0.95rem',
+          padding: '0.35rem 0.7rem',
+          borderRadius: '18px',
+          minWidth: '90px',
+          maxWidth: '120px',
+          marginRight: '0.2rem',
+          boxShadow: '0 1px 4px rgba(74,21,75,0.07)',
+          transition: 'background 0.2s, color 0.2s, box-shadow 0.2s',
+        }}
+      >
+        Login
+      </Button>
+      <Button
+        as={Link}
+        to="/register"
+        variant="primary"
+        size="sm"
+        onClick={handleNavClick}
+        style={{
+          fontSize: '0.95rem',
+          padding: '0.35rem 0.7rem',
+          borderRadius: '18px',
+          minWidth: '90px',
+          maxWidth: '120px',
+          boxShadow: '0 1px 4px rgba(74,21,75,0.07)',
+          transition: 'background 0.2s, color 0.2s, box-shadow 0.2s',
+        }}
+      >
+        Register
+      </Button>
     </Nav>
   );
 
