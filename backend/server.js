@@ -21,7 +21,7 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'https://shikshahub.vercel.app',
-    'https://myshikshahub.netlify.app' // removed trailing slash
+    'https://myshikshahub.netlify.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
