@@ -14,7 +14,7 @@
 
 ## 📸 Demo
 
-🔗 **Live Demo**: [Click here to visit ShikshaHub](myshikshahub.netlify.app)
+🔗 **Live Demo**: [Click here to visit ShikshaHub](https://myshikshahub.netlify.app/)
 
 ## 🖼️ Screenshots
 
