@@ -271,7 +271,7 @@ html, body, #root {
   }
 } 
 
-/* --- Add/Refine styles for Navbar Login/Register buttons on mobile --- */
+/* --- Add/Refine styles for Navbar Login/Register button on mobile --- */
 @media (max-width: 768px) {
   .guest-auth-buttons {
     flex-direction: row !important;
