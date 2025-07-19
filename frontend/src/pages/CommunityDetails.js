@@ -828,7 +828,7 @@ const handleViewMaterial = async (materialId) => {
                           {joinRequests.map(request => (
                             <ListGroup.Item 
                               key={request._id}
-                              className="d-flex justify-content-between align-items-center"
+                              className="join-request-item d-flex justify-content-between align-items-center flex-wrap"
                             >
                               <div>
                                 <span className="fw-bold">{request.user.name}</span>
@@ -843,7 +843,7 @@ const handleViewMaterial = async (materialId) => {
                                   Requested: {new Date(request.createdAt).toLocaleString()}
                                 </div>
                               </div>
-                              <div className="d-flex">
+                              <div className="d-flex action-btns">
                                 <Button 
                                   variant="success" 
                                   size="sm" 

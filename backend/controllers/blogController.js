@@ -2,6 +2,7 @@ const Blog = require('../models/Blog');
 const Community = require('../models/Community');
 const User = require('../models/User');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { sendBlogUploadEmail, sendBlogReviewEmail } = require('../utils/emailService');
 require('dotenv').config();
 
 // Initialize the Gemini API
@@ -65,6 +66,8 @@ exports.createBlog = async (req, res) => {
       communityId,
       { $push: { blogs: newBlog._id } }
     );
+
+    // Remove blog upload notification to all members
 
     res.status(201).json(newBlog);
   } catch (error) {
@@ -319,6 +322,12 @@ exports.reviewBlog = async (req, res) => {
     blog.reviewedAt = Date.now();
 
     await blog.save();
+
+    // Notify blog author if they want review emails
+    const author = await User.findById(blog.author);
+    if (author && author.emailPreferences?.blogReview !== false) {
+      sendBlogReviewEmail(author.email, blog.title, status);
+    }
 
     res.json({
       message: `Blog ${status === 'approved' ? 'approved' : 'rejected'} successfully`,

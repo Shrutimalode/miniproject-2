@@ -1,10 +1,32 @@
-import React from 'react';
-import { Container, Card, Row, Col, Badge, ListGroup, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Card, Row, Col, Badge, ListGroup, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import api from '../api';
 
 const Profile = () => {
   const { user } = useAuth();
+  const [emailPrefs, setEmailPrefs] = useState(user?.emailPreferences || {
+    materialUpload: true,
+    blogUpload: true,
+    blogReview: true
+  });
+  const [savingPrefs, setSavingPrefs] = useState(false);
+
+  const handleEmailPrefChange = (key) => {
+    setEmailPrefs(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const saveEmailPrefs = async () => {
+    setSavingPrefs(true);
+    try {
+      await api.put('/auth/email-preferences', { emailPreferences: emailPrefs });
+      // Optionally show a success message
+    } catch (err) {
+      // Optionally show an error message
+    }
+    setSavingPrefs(false);
+  };
 
   // Function to get role badge
   const getRoleBadge = (role) => {
@@ -96,6 +118,43 @@ const Profile = () => {
             </Card.Body>
           </Card>
           
+          <Card className="shadow-sm mb-4">
+            <Card.Body>
+              <Card.Title>Email Notification Preferences</Card.Title>
+              <Form>
+                <Form.Check
+                  type="switch"
+                  id="material-upload-switch"
+                  label="Material Upload Notifications"
+                  checked={emailPrefs.materialUpload}
+                  onChange={() => handleEmailPrefChange('materialUpload')}
+                />
+                <Form.Check
+                  type="switch"
+                  id="blog-upload-switch"
+                  label="Blog Upload Notifications"
+                  checked={emailPrefs.blogUpload}
+                  onChange={() => handleEmailPrefChange('blogUpload')}
+                />
+                <Form.Check
+                  type="switch"
+                  id="blog-review-switch"
+                  label="Blog Approved/Rejected Notifications"
+                  checked={emailPrefs.blogReview}
+                  onChange={() => handleEmailPrefChange('blogReview')}
+                />
+                <Button
+                  variant="primary"
+                  className="mt-2"
+                  onClick={saveEmailPrefs}
+                  disabled={savingPrefs}
+                >
+                  {savingPrefs ? 'Saving...' : 'Save Preferences'}
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+
           <Card className="shadow-sm">
             <Card.Body>
               <Card.Title>Account Information</Card.Title>

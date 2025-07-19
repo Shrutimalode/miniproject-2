@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Form, Button, Alert, Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Card, Form, Button, Alert, Container, Row, Col, Spinner, Modal } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import api from '../api';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,10 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+  const [forgotPasswordResult, setForgotPasswordResult] = useState('');
+  const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
   
   const { login, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
@@ -136,7 +141,9 @@ const Login = () => {
                 >
                   {loading ? 'Logging in...' : 'Login'}
                 </Button>
-                
+                <div className="text-center">
+                  <Button variant="link" onClick={() => setShowForgotPassword(true)} style={{padding:0}}>Forgot Password?</Button>
+                </div>
                 <div className="text-center mt-3">
                   <p>
                     Don't have an account? <Link to="/register">Register</Link>
@@ -147,6 +154,40 @@ const Login = () => {
           </Card>
         </Col>
       </Row>
+      <Modal show={showForgotPassword} onHide={() => setShowForgotPassword(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Forgot Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={async e => {
+            e.preventDefault();
+            setForgotPasswordResult('');
+            setForgotPasswordLoading(true);
+            try {
+              const res = await api.post('/auth/forgot-password', { email: forgotPasswordEmail });
+              setForgotPasswordResult(res.data.message || 'If your email is registered, a reset link has been sent.');
+            } catch (err) {
+              setForgotPasswordResult(err.response?.data?.message || 'Error sending reset email');
+            }
+            setForgotPasswordLoading(false);
+          }}>
+            <Form.Group className="mb-3" controlId="forgotPasswordEmail">
+              <Form.Label>Enter your registered email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter your email"
+                value={forgotPasswordEmail}
+                onChange={e => setForgotPasswordEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button type="submit" variant="primary" disabled={forgotPasswordLoading} className="w-100">
+              {forgotPasswordLoading ? 'Sending...' : 'Send Reset Link'}
+            </Button>
+            {forgotPasswordResult && <Alert variant="info" className="mt-3">{forgotPasswordResult}</Alert>}
+          </Form>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };

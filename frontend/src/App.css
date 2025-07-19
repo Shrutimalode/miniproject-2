@@ -226,4 +226,28 @@ html, body, #root {
 
 .guest-auth-buttons {
   margin-left: 1rem;
+}
+
+.join-request-item {
+  flex-wrap: wrap;
+}
+
+.join-request-item .action-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .join-request-item {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .join-request-item > div {
+    width: 100%;
+  }
+  .join-request-item .action-btns {
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+  }
 } 

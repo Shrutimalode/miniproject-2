@@ -340,7 +340,112 @@ const sendWelcomeEmail = async (userEmail, userName) => {
   }
 };
 
+const createResetPasswordEmailTemplate = (resetUrl) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Reset Your Password</title>
+      <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f7fafc; padding: 20px; }
+        .email-container { max-width: 500px; margin: 0 auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 32px; }
+        h2 { color: #764ba2; }
+        .reset-link { display: inline-block; margin: 24px 0; padding: 12px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff !important; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        p { color: #333; }
+      </style>
+    </head>
+    <body>
+      <div class="email-container">
+        <h2>Password Reset Request</h2>
+        <p>We received a request to reset your password. Click the button below to set a new password. If you did not request this, you can safely ignore this email.</p>
+        <a href="${resetUrl}" class="reset-link">Reset Password</a>
+        <p>This link will expire in 1 hour.</p>
+        <p>Thanks,<br/>Team ShikshaHub</p>
+      </div>
+    </body>
+    </html>
+  `;
+};
+
+const sendResetPasswordEmail = async (userEmail, resetUrl) => {
+  try {
+    const transporter = createTransporter();
+    const mailOptions = {
+      from: process.env.EMAIL_USER || 'noreply@shikshahub.com',
+      to: userEmail,
+      subject: 'Reset Your Password - ShikshaHub',
+      html: createResetPasswordEmailTemplate(resetUrl)
+    };
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Password reset email sent successfully:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+const sendMaterialUploadEmail = async (userEmail, communityName, materialTitle) => {
+  try {
+    const transporter = createTransporter();
+    const mailOptions = {
+      from: process.env.EMAIL_USER || 'noreply@shikshahub.com',
+      to: userEmail,
+      subject: `A new material titled <strong>${materialTitle}</strong> has just been uploaded in the <strong>${communityName}</strong> community on ShikshaHub.</p>
+<p>Don't miss out on the latest content. Dive in and explore the material now!</p>`
+    };
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error('Error sending material upload email:', error);
+  }
+};
+
+const sendBlogUploadEmail = async (userEmail, communityName, blogTitle) => {
+  try {
+    const transporter = createTransporter();
+    const mailOptions = {
+      from: process.env.EMAIL_USER || 'noreply@shikshahub.com',
+      to: userEmail,
+      subject: `New Blog Uploaded in ${communityName}`,
+      html: `<p>A new blog titled <strong>${blogTitle}</strong> has been uploaded in the community <strong>${communityName}</strong>.</p>`
+    };
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error('Error sending blog upload email:', error);
+  }
+};
+
+const sendBlogReviewEmail = async (userEmail, blogTitle, status) => {
+  try {
+    const transporter = createTransporter();
+    let subject, html;
+    if (status === 'approved') {
+      subject = `Your Blog Was Approved!`;
+      html = `🎉 Great job! Your blog titled <strong>${blogTitle}</strong> has been <strong>approved</strong> and is now live on ShikshaHub.</p><p>Keep sharing your thoughts and inspiring others with your writing.`;
+    } else {
+      subject = `Your Blog Was Rejected`;
+      html = `<p>We appreciate your effort in submitting a blog titled <strong>${blogTitle}</strong>.</p><p>Unfortunately, it has been <strong>rejected</strong> during the review process. Please visit <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/myblogs" style="color: #764ba2; font-weight: bold;">ShikshaHub</a> for detailed feedback.</p><p>Feel free to revise and submit again — we’d love to see it!</p>`;
+    }
+    const mailOptions = {
+      from: process.env.EMAIL_USER || 'noreply@shikshahub.com',
+      to: userEmail,
+      subject,
+      html
+    };
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error('Error sending blog review email:', error);
+  }
+};
+
 module.exports = {
   sendWelcomeEmail,
-  createWelcomeEmailTemplate
+  createWelcomeEmailTemplate,
+  sendResetPasswordEmail,
+  createResetPasswordEmailTemplate,
+  sendMaterialUploadEmail,
+  sendBlogUploadEmail,
+  sendBlogReviewEmail
 };

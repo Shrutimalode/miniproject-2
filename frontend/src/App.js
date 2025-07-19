@@ -20,6 +20,7 @@ import BlogView from './pages/BlogView';
 import BlogEdit from './pages/BlogEdit';
 import NotFound from './pages/NotFound';
 import BlogCreate from './pages/BlogCreate';
+import ResetPassword from './pages/ResetPassword';
 
 // Context
 import { useAuth } from './contexts/AuthContext';
@@ -63,6 +64,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             
             <Route 
               path="/dashboard" 
@@ -135,6 +137,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
               
               <Route 
                 path="/dashboard" 

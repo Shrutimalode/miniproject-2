@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const { exec } = require('child_process'); // Import child_process
 const axios = require('axios');
+const { sendMaterialUploadEmail } = require('../utils/emailService');
 
 // Upload new material
 exports.uploadMaterial = async (req, res) => {
@@ -98,6 +99,20 @@ exports.uploadMaterial = async (req, res) => {
       communityId,
       { $push: { materials: newMaterial._id } }
     );
+
+    // Notify community members (admin, teachers, students)
+    const memberIds = [
+      community.admin,
+      ...community.teachers,
+      ...community.students
+    ];
+    const User = require('../models/User');
+    const members = await User.find({ _id: { $in: memberIds } });
+    for (const member of members) {
+      if (member.emailPreferences?.materialUpload !== false) {
+        sendMaterialUploadEmail(member.email, community.name, newMaterial.title);
+      }
+    }
 
     res.status(201).json(newMaterial);
   } catch (error) {

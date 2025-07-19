@@ -31,6 +31,16 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+  emailPreferences: {
+    type: Object,
+    default: {
+      materialUpload: true,
+      blogUpload: true,
+      blogReview: true
+    }
   }
 });
 
